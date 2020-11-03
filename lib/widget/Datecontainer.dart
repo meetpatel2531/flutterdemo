@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:async';
+import 'package:analog_clock/analog_clock.dart';
 
 var now = new DateTime.now();
 
@@ -83,7 +84,7 @@ class _DatecontainerState extends State<Datecontainer> {
         padding: const EdgeInsets.only(
             left: 10.0, top: 3.0, bottom: 2.0, right: 10.0),
         width: 500,
-        height: 220.0,
+        height: 140.0,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           color: Colors.white,
@@ -136,20 +137,19 @@ class _DatecontainerState extends State<Datecontainer> {
                           width: 40.0,
                           height: 30.0,
                           child: RaisedButton(
+                            child: Center(
                               child: Icon(
                                   _isStart ? Icons.play_arrow : Icons.stop),
-                              onPressed: _startStopButtonPressed,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(5.0),
-                                side: BorderSide(color: Colors.black),
-                              ))),
+                            ),
+                            onPressed: _startStopButtonPressed,
+                          )),
                       SizedBox(
                           width: 50.0,
                           height: 30.0,
                           child: RaisedButton(
-                              child: Text('end'),
+                              child: Icon(Icons.cached),
                               onPressed: _resetButtonPressed,
-                              color: Colors.amber,
+                              color: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: new BorderRadius.circular(5.0),
                                 side: BorderSide(color: Colors.black),
@@ -159,13 +159,36 @@ class _DatecontainerState extends State<Datecontainer> {
                 )
               ],
             ),
+
+            // Flexible(
+            //   child: Align(
+            //     alignment: Alignment.centerRight,
+            //     child: Icon(
+            //       Icons.watch_later_outlined,
+            //       size: 60.0,
+            //       color: Colors.grey[700],
+            //     ),
+            //   ),
+            // ),
             Flexible(
               child: Align(
                 alignment: Alignment.centerRight,
-                child: Icon(
-                  Icons.watch_later_outlined,
-                  size: 60.0,
-                  color: Colors.grey[700],
+                child: AnalogClock(
+                  decoration: BoxDecoration(
+                      border: Border.all(width: 3.0, color: Colors.black),
+                      color: Colors.transparent,
+                      shape: BoxShape.circle),
+                  width: 80.0,
+                  isLive: true,
+                  hourHandColor: Colors.black,
+                  minuteHandColor: Colors.black,
+                  showSecondHand: true,
+                  numberColor: Colors.black87,
+                  showNumbers: true,
+                  textScaleFactor: 1.4,
+                  showTicks: false,
+                  showDigitalClock: false,
+                  datetime: DateTime(2019, 1, 1, 9, 12, 15),
                 ),
               ),
             ),

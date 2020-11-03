@@ -7,6 +7,7 @@ import 'package:project/widget/Datecontainer.dart';
 import '../widget/Dropdown.dart';
 import '../widget/GradientButton.dart';
 import '../widget/Countno.dart';
+import 'package:analog_clock/analog_clock.dart';
 
 var now = new DateTime.now();
 
@@ -109,19 +110,42 @@ class Home extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text("Schedule",
-                        style:
-                            TextStyle(fontSize: 20, color: Colors.grey[700])),
-                    Text("Morning",
-                        style:
-                            TextStyle(fontSize: 20, color: Colors.grey[700])),
-                    Text("Afternoon",
-                        style:
-                            TextStyle(fontSize: 20, color: Colors.grey[700])),
-                  ],
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      SizedBox(
+                        width: 100,
+                        child: Text("Schedule",
+                            style: TextStyle(
+                                fontSize: 20, color: Colors.grey[700])),
+                      ),
+                      SizedBox(
+                        width: 100,
+                        child: Text("Morning",
+                            style: TextStyle(
+                                fontSize: 20, color: Colors.grey[700])),
+                      ),
+                      SizedBox(
+                        width: 100,
+                        child: Text("Afternoon",
+                            style: TextStyle(
+                                fontSize: 20, color: Colors.grey[700])),
+                      ),
+                      SizedBox(
+                        width: 100,
+                        child: Text("Evening",
+                            style: TextStyle(
+                                fontSize: 20, color: Colors.grey[700])),
+                      ),
+                      SizedBox(
+                        width: 100,
+                        child: Text("Night",
+                            style: TextStyle(
+                                fontSize: 20, color: Colors.grey[700])),
+                      ),
+                    ],
+                  ),
                 ),
                 Container(
                     height: 1,
@@ -314,6 +338,26 @@ class Home extends StatelessWidget {
               ],
             ),
           ),
+          Container(
+            height: 200,
+            child: AnalogClock(
+              decoration: BoxDecoration(
+                  border: Border.all(width: 2.0, color: Colors.black),
+                  color: Colors.transparent,
+                  shape: BoxShape.circle),
+              width: 150.0,
+              isLive: true,
+              hourHandColor: Colors.black,
+              minuteHandColor: Colors.black,
+              showSecondHand: true,
+              numberColor: Colors.black87,
+              showNumbers: true,
+              textScaleFactor: 1.4,
+              showTicks: false,
+              showDigitalClock: false,
+              datetime: DateTime(2019, 1, 1, 9, 12, 15),
+            ),
+          )
         ])),
         bottomNavigationBar: new Theme(
           data: Theme.of(context).copyWith(
