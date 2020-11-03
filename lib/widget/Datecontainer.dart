@@ -15,9 +15,21 @@ class Datecontainer extends StatefulWidget {
 
 class _DatecontainerState extends State<Datecontainer> {
   bool _isStart = true;
+  bool _isContainerActive = false;
   String _stopwatchText = '00:00:00';
+  var timelog;
   final _stopWatch = new Stopwatch();
   final _timeout = const Duration(seconds: 1);
+
+  void _printValue() {
+    _stopwatchText = _stopWatch.elapsed.inHours.toString().padLeft(2, '0') +
+        ':' +
+        (_stopWatch.elapsed.inMinutes % 60).toString().padLeft(2, '0') +
+        ':' +
+        (_stopWatch.elapsed.inSeconds % 60).toString().padLeft(2, '0');
+    timelog = _stopwatchText;
+    _isContainerActive = true;
+  }
 
   void _startTimeout() {
     new Timer(_timeout, _handleTimeout);
@@ -37,7 +49,7 @@ class _DatecontainerState extends State<Datecontainer> {
       if (_stopWatch.isRunning) {
         _isStart = true;
         _stopWatch.stop();
-        print(_stopwatchText);
+        _printValue();
       } else {
         _isStart = false;
         _stopWatch.start();
@@ -99,6 +111,7 @@ class _DatecontainerState extends State<Datecontainer> {
                     fontSize: 25,
                   ),
                 ),
+                Logs(isContainerActive: _isContainerActive, data: timelog),
                 Container(
                   margin: const EdgeInsets.only(left: 4.0, top: 15.0),
                   alignment: Alignment.center,
@@ -158,5 +171,22 @@ class _DatecontainerState extends State<Datecontainer> {
             ),
           ],
         ));
+  }
+}
+
+class Logs extends StatelessWidget {
+  Logs({this.isContainerActive, this.data});
+  final bool isContainerActive;
+  final String data;
+  @override
+  // ignore: missing_return
+  Widget build(BuildContext context) {
+    if (isContainerActive == true) {
+      return Container(
+        child: Text(data),
+      );
+    } else {
+      return Container();
+    }
   }
 }
